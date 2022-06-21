@@ -42,6 +42,10 @@ if(isset($_POST['data']) && isset($_POST['type']) && isset($_POST['action'])){
         if($col == "email_id"){
           $email_id = $val;
         }
+        if($col == "contact_number"){
+          $contact = $val;
+        }
+
         if($col == 'password'){
           $column.= "`".$col."`,";
             $values.= "'".md5($val)."',";
