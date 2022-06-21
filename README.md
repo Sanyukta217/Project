@@ -1,3 +1,4 @@
+# Project
 TASK 1:
 
 1. Create a login form, with the right credentials users should be allowed to login. Use sessions & cookies in the right place and implement it. Front end (JS) validation is a must.
@@ -16,4 +17,3 @@ TASK 1:
 6. Create a checklist/task list, where latest task will come on top and on checking/ticking the task it should go under completed task [list how google tasks works]
 
 Kindly above task using AJAX, JQuery, JSON, REST API on Core PHP, MySql, Bootstrap
-
