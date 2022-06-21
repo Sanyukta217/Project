@@ -43,6 +43,17 @@ defined('READAUTh') or die('Not authorised');
        return $retyrn;
      }
    }
+   function count($tbl, $cond){
+     $sqlSelct = "SELECT * FROM `".$tbl."` WHERE 1 ".$cond."";
+     // echo $sqlSelct;
+     $resSelect = mysqli_query($GLOBALS['connection'],$sqlSelct);
+     if($resSelect && mysqli_num_rows($resSelect) > 0){
+       return mysqli_num_rows($resSelect);
+     }
+     else{
+       return 0;
+     }
+   }
  }
 
  /**
@@ -61,6 +72,26 @@ defined('READAUTh') or die('Not authorised');
        else{
          return 0;
        }
+     }
+   }
+   function fetchRights($email){
+     if(session_id() == '') {
+         session_start();
+     }
+     $sqlRights = "SELECT * FROM `users_tbl` WHERE `email_id`='".$_SESSION['email_id']."'";
+     $resRighs = mysqli_query($GLOBALS['connection'],$sqlRights);
+     if($resRighs && mysqli_num_rows($resRighs)){
+       $rowLogin = mysqli_fetch_array($resRighs);
+       $_SESSION['can_add_user'] = $rowLogin['can_add_user'];
+       $_SESSION['can_view_user'] = $rowLogin['can_view_user'];
+       $_SESSION['can_update_user'] = $rowLogin['can_update_user'];
+       $_SESSION['can_delete_user'] = $rowLogin['can_delete_user'];
+       $_SESSION['can_add_enquiry'] = $rowLogin['can_add_enquiry'];
+       $_SESSION['can_view_enquiry'] = $rowLogin['can_view_enquiry'];
+       $_SESSION['can_delete_enquiry'] = $rowLogin['can_delete_enquiry'];
+       $_SESSION['can_add_task'] = $rowLogin['can_add_task'];
+       $_SESSION['can_view_task'] = $rowLogin['can_view_task'];
+       $_SESSION['can_update_task'] = $rowLogin['can_update_task'];
      }
    }
  }

@@ -28,7 +28,7 @@
               User List
           </div>
           <div class="card-body table-responsive">
-              <table id="datatablesSimple" class="border datattable compact">
+              <table id="datatablesSimple" class="border datattable compact nowrap">
                   <thead>
                       <tr>
                           <th >Actions</th>

@@ -28,11 +28,11 @@
               Enquiry List
           </div>
           <div class="card-body table-responsive">
-              <table id="datatablesSimple" class="datattable border">
+              <table id="datatablesSimple" class="datattable border compact nowrap">
                   <thead>
                       <tr>
                         <?php if ($_SESSION['can_delete_enquiry'] == '1') : ?>
-                          <th><input type="checkbox" class='checkall' id='checkall' title="Check All"><br/><input type="button" id='delete_all_enquiry' value='Delete' class="btn btn-sm btn-danger" active_deactive='Delete' nonce=<?php echo $_SESSION['nonce'];?> ta="enquiry" ></th>
+                          <th align="center"><input type="checkbox" class='checkall' id='checkall' title="Check All"><br/><span id='delete_all_enquiry' active_deactive='Delete' nonce=<?php echo $_SESSION['nonce'];?> ta="enquiry" class="text-danger fa fa-trash" title="Click to delete"></span></th>
                         <?php endif ?>
                           <th>Name</th>
                           <th>Email</th>
@@ -54,7 +54,7 @@
                         $status = ($value['status'] == '1') ? "Pending" : "Completed";
                         $outp.="<tr>";
                          if ($_SESSION['can_delete_enquiry'] == '1') :
-                          $outp.="<td><input type='checkbox' class='delete_enquiry' id='delcheck_".$value['sno']."' onclick='checkcheckbox();' value='".$value['sno']."'><br/>
+                          $outp.="<td align='center'><input type='checkbox' class='delete_enquiry' id='delcheck_".$value['sno']."' onclick='checkcheckbox();' value='".$value['sno']."'><br/>
                           </td>";
                         endif;
                             $outp.="<td>".$value['name_of_enquiry']."</td>

@@ -28,7 +28,7 @@
               Task List
           </div>
           <div class="card-body table-responsive">
-              <table id="taskList" class="border datattable">
+              <table id="taskList" class="border datattable nowrap compact">
                   <thead>
                       <tr>
                           <th>Actions</th>

@@ -50,6 +50,7 @@
     			$_SESSION['can_delete_user'] = $rowLogin['can_delete_user'];
     			$_SESSION['can_add_enquiry'] = $rowLogin['can_add_enquiry'];
     			$_SESSION['can_view_enquiry'] = $rowLogin['can_view_enquiry'];
+          $_SESSION['can_delete_enquiry'] = $rowLogin['can_delete_enquiry'];
     			$_SESSION['can_add_task'] = $rowLogin['can_add_task'];
     			$_SESSION['can_view_task'] = $rowLogin['can_view_task'];
     			$_SESSION['can_update_task'] = $rowLogin['can_update_task'];

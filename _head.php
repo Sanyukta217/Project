@@ -25,5 +25,6 @@
 	  define('READAUTh', true);
 	}
 	require_once('authenticate.php');
-
+  $auth = new Auth;
+  $sessuion = $auth->fetchRights($_SESSION['email_id']);
   ?>
