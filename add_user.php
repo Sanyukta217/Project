@@ -25,7 +25,7 @@
     <main class="mt-3">
       <div class="container">
           <div class="row justify-content-center">
-              <div class="col-lg-7">
+              <div class="col-sm-12">
                   <div class="card shadow-lg border-0 rounded-lg mt-5">
                       <div class="card-header"><h5 class="text-center font-weight-light">Add User</h5></div>
                       <div class="card-body">
@@ -34,19 +34,19 @@
                               <div class="row mb-3">
                                   <div class="col-md-6">
                                       <div class="form-floating mb-3 mb-md-0">
-                                          <input class="form-control" id="inputName" type="text" placeholder="Enter your first name" name="username" required/>
+                                          <input class="form-control allow-alphanumeric" id="inputName" type="text" placeholder="Enter your first name" name="username" required minlength="3"/>
                                           <label for="inputName">Name</label>
                                       </div>
                                   </div>
                                   <div class="col-md-6">
                                       <div class="form-floating">
-                                          <input class="form-control" id="inputContactnumber" type="text" name="contact_number" placeholder="Enter your conatact number" required/>
+                                          <input class="form-control allow-number" id="inputContactnumber" type="text" name="contact_number" placeholder="Enter your conatact number" required minlength="10" maxlength="10"/>
                                           <label for="inputContactnumber" >Contact Number</label>
                                       </div>
                                   </div>
                               </div>
                               <div class="form-floating mb-3">
-                                  <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" name="email_id" required/>
+                                  <input class="form-control allow-email" id="inputEmail" type="email" placeholder="name@example.com" name="email_id" required/>
                                   <label for="inputEmail">Email address</label>
                               </div>
                               <div class="row mb-3">

@@ -32,7 +32,7 @@
                               <div class="row mb-3">
                                   <div class="col-md-12">
                                       <div class="form-floating mb-3 mb-md-0">
-                                          <input class="form-control" id="inputTitle" name="task_title" required type="text" placeholder="Enter task title" />
+                                          <input class="form-control allow-alphanumeric" id="inputTitle" name="task_title" required type="text" placeholder="Enter task title" minlength="3"/>
                                           <label for="inputTitle">Task title</label>
                                       </div>
                                   </div>
@@ -40,7 +40,7 @@
                               <div class="row">
                                   <div class="col-md-12">
                                       <div class="form-floating">
-                                          <textarea class="form-control" id="inputTaskDesc" name="task_desc" placeholder="Enter your last name" row="5"> </textarea>
+                                          <textarea class="form-control allow-alphanumeric" id="inputTaskDesc" name="task_desc" placeholder="Enter your last name" row="5" minlength="3"> </textarea>
                                           <label for="inputTaskDesc">Task Description</label>
                                       </div>
                                   </div>

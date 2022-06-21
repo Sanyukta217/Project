@@ -15,6 +15,8 @@
 
 <script src="js/scripts.js"></script>
 <script src="js/_customs.js"></script>
+<script src="js/plugins.js"></script>
+
   <script src="js/sweetalert2.all.min.js"></script>
 
 <!-- <script src="js/datatables-simple-demo.js"></script> -->

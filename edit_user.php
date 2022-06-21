@@ -40,13 +40,13 @@
                               <div class="row mb-3">
                                   <div class="col-md-6">
                                       <div class="form-floating mb-3 mb-md-0">
-                                          <input class="form-control" id="inputName" type="text" placeholder="Enter your first name" name="username" required  value="<?php echo $name;?>"/>
+                                          <input class="form-control allow-alphanumeric" id="inputName" type="text" placeholder="Enter your first name" name="username" required  value="<?php echo $name;?>" minlength="3"/>
                                           <label for="inputName">Name</label>
                                       </div>
                                   </div>
                                   <div class="col-md-6">
                                       <div class="form-floating">
-                                          <input class="form-control" id="inputContactnumber" type="text" name="contact_number" placeholder="Enter your last name" required value="<?php echo $value['contact_number']; ?>" />
+                                          <input class="form-control" id="inputContactnumber" type="text" name="contact_number" placeholder="Enter your last name" required value="<?php echo $value['contact_number']; ?>" minlength="10" maxlength="10"/>
                                           <label for="inputContactnumber">Contact Number</label>
                                       </div>
                                   </div>
