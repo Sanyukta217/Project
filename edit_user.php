@@ -8,6 +8,11 @@
   $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
   echo $buffer;
   require("_navbar.php");
+  $auth = new Auth;
+  $check = $auth->validate_rights('can_update_user');
+  if ($check == '0'){
+   header('Location: 404.php');
+  }
   if(isset($_GET['id'])){
     $users = new Users;
     $showuser = $users->view('users_tbl','AND `email_id` = "'.$_GET['id'].'"','');
@@ -24,9 +29,9 @@
     <main class="mt-3">
       <div class="container">
           <div class="row justify-content-center">
-              <div class="col-lg-7">
+              <div class="col-sm-12">
                   <div class="card shadow-lg border-0 rounded-lg mt-5">
-                      <div class="card-header"><h5 class="text-center font-weight-light">Edit User</h5></div>
+                      <div class="card-header"><h5 class="text-center font-weight-light">Edit User (<?php echo $users->view('users_tbl','AND `email_id` = "'.$_GET['id'].'"','username');?>)</h5></div>
                       <div class="card-body">
                         <form data-id="update" id="users" class="submiit" method="post" nonce="<?php echo $_SESSION['nonce'];?>">
                             <?php foreach ($showuser as $key => $value):
@@ -84,6 +89,8 @@
                             $checked6 = ($value['can_update_task'] == '1') ? "checked='checked'" : "";
                             $checked7 = ($value['can_add_enquiry'] == '1') ? "checked='checked'" : "";
                             $checked8 = ($value['can_view_enquiry'] == '1') ? "checked='checked'" : "";
+                            $checked9 = ($value['can_delete_enquiry'] == '1') ? "checked='checked'" : "";
+
 
                             ?>
                             <div id="assign_roless" class="row">
@@ -123,14 +130,16 @@
                                 <input type="checkbox" id="view_enquiry" name="can_view_enquiry" value="1" <?php echo $checked8; ?>/>
                                 <label>View Enquiry</label>
                               </div>
+                              <div class="col-sm-4">
+                                <input type="checkbox" id="delete_enquiry" name="can_delete_enquiry" value="1" <?php echo $checked9; ?>/>
+                                <label>Delete Enquiry</label>
+                              </div>
                             </div>
                           </fieldset>
                             <?php endforeach; ?>
                               <div class="mt-4 mb-0">
                                   <div class="d-grid"><input class="btn btn-primary btn-block" type="submit" value="Update user"/></div>
                               </div>
-
-
                           </form>
                       </div>
 

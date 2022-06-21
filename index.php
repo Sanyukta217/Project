@@ -124,6 +124,7 @@
             100%{background-position:0% 50%}
         }
     </style>
+
     <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
             <main>
@@ -133,6 +134,7 @@
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header"><h3 class="text-center font-weight-light my-4">Welcome Back!!</h3></div>
                                 <div class="card-body">
+                                  <span id="hideAfter2"><?php echo (!empty($_SESSION['sucessPsswreset'])) ? $_SESSION['sucessPsswreset'] : "" ; ?></span>
                                     <form  class="loggin" action="./" method="POST" id="login" nonce="<?php echo $_SESSION['nonce'];?>">
                                         <div class="form-floating mb-3">
                                             <input class="form-control" name="email_id" id="inputEmail" type="email" placeholder="name@example.com" />
@@ -147,7 +149,7 @@
                                             <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="password.html">Forgot Password?</a>
+                                            <a class="small" href="reset_password.php">Forgot Password?</a>
                                             <input class="btn btn-sm btn-primary" name="submit" type="submit" id="submit" value="Login"/>
                                         </div>
                                     </form>
@@ -159,4 +161,14 @@
             </main>
         </div>
     </div>
-  <?php require("_foot.php"); ?>
+  <?php require("_foot.php");
+  unset($_SESSION['sucessPsswreset']);
+  ?>
+  <script>
+    $(document).ready(function(){
+      setTimeout(function(){
+        $("#hideAfter2").hide();
+        $("#hideAfter2").html("");
+      },2000);
+    });
+  </script>

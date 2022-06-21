@@ -225,3 +225,38 @@ $approveids_arr = array();
       exit;
     }
   }
+
+  if (isset($_POST['for']) && $_POST['for']=='change_passowrd') {
+    $email = Con::esc_str($_POST['email']);
+    $password = Con::esc_str($_POST['password']);
+    $currpass = Con::esc_str($_POST['current_password']);
+    $sqlSel = "SELECT * FROM `users_tbl` WHERE `email_id` = '".$email."' AND `password`='".md5($currpass)."'";
+    // echo $sqlSel;
+    $showtbl = mysqli_query($GLOBALS['connection'],$sqlSel);
+
+    if($showtbl && mysqli_num_rows($showtbl) == '1'){
+      $sqlUpdatePass = "UPDATE `users_tbl` SET `password` = '".md5($password)."' WHERE `email_id`='".$email."'";
+       $res = mysqli_query($GLOBALS['connection'], $sqlUpdatePass);
+       if($res){
+         $to = $email;
+         $subject = 'Your password has been changed';
+         $message = 'Hello User \n
+         Your password has been changed recently. Please login in with new password.';
+         /* Send the message using mail() function */
+         if(@mail($to, $subject, $message ))
+         {
+
+
+         //echo "New Password has been sent to your mail, Please check your mail and SignIn.";
+         }
+         echo "Done";
+       }
+       else{
+         echo "Try again";
+       }
+    }
+    else{
+      echo "Current Password is not correct";
+    }
+
+  }

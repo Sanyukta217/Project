@@ -8,6 +8,11 @@
   $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
   echo $buffer;
   require("_navbar.php");
+  $auth = new Auth;
+  $check = $auth->validate_rights('can_view_enquiry');
+  if ($check == '0'){
+   header('Location: 404.php');
+  }
 ?>
 <style>
 
@@ -26,8 +31,9 @@
               <table id="datatablesSimple" class="datattable border">
                   <thead>
                       <tr>
-
+                        <?php if ($_SESSION['can_delete_enquiry'] == '1') : ?>
                           <th><input type="checkbox" class='checkall' id='checkall' title="Check All"><br/><input type="button" id='delete_all_enquiry' value='Delete' class="btn btn-sm btn-danger" active_deactive='Delete' nonce=<?php echo $_SESSION['nonce'];?> ta="enquiry" ></th>
+                        <?php endif ?>
                           <th>Name</th>
                           <th>Email</th>
                           <th>Contact Number</th>
@@ -47,9 +53,11 @@
                       foreach ($showtbl as $key => $value) {
                         $status = ($value['status'] == '1') ? "Pending" : "Completed";
                         $outp.="<tr>";
-                        $outp.="<td><input type='checkbox' class='delete_enquiry' id='delcheck_".$value['sno']."' onclick='checkcheckbox();' value='".$value['sno']."'><br/>
-                        </td>
-                                <td>".$value['name_of_enquiry']."</td>
+                         if ($_SESSION['can_delete_enquiry'] == '1') :
+                          $outp.="<td><input type='checkbox' class='delete_enquiry' id='delcheck_".$value['sno']."' onclick='checkcheckbox();' value='".$value['sno']."'><br/>
+                          </td>";
+                        endif;
+                            $outp.="<td>".$value['name_of_enquiry']."</td>
                                 <td>".$value['email_address']."</td>
                                 <td>".$value['contact_number']."</td>
                                 <td>".$value['enquired_on']."</td>
@@ -58,10 +66,8 @@
                                 <td>".date("d-M-Y H:i:s",strtotime($value['added_on']))."</td>
                                 ";
                         $outp.="</tr>";
-
                         }
                         echo $outp;
-
                       }
                      ?>
                   </tbody>

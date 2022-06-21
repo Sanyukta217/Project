@@ -8,6 +8,11 @@
   $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
   echo $buffer;
   require("_navbar.php");
+  $auth = new Auth;
+  $check = $auth->validate_rights('can_add_task');
+  if ($check == '0'){
+   header('Location: 404.php');
+  }
 ?>
 <style>
 

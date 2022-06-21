@@ -25,4 +25,5 @@
 	  define('READAUTh', true);
 	}
 	require_once('authenticate.php');
+
   ?>

@@ -18,7 +18,7 @@ class Con
 	}
 		//This function is used to create escape string.
 	function esc_str($str){
-		return mysqli_real_escape_string(Con::connect(), $str);
+		return mysqli_real_escape_string(Con::connect(), trim($str));
 	}
 
 	//this function is used to check email address

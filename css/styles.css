@@ -11750,3 +11750,7 @@ tr.strikeout td:after {
   content: "\00B7";
   font-size: 1px;
 }
+
+.center{
+  text-align: center;
+}

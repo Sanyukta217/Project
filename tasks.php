@@ -8,6 +8,11 @@
   $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
   echo $buffer;
   require("_navbar.php");
+  $auth = new Auth;
+  $check = $auth->validate_rights('can_view_task');
+  if ($check == '0'){
+   header('Location: 404.php');
+  }
 ?>
 <style>
 
@@ -43,8 +48,12 @@
                       if(is_array($showtbl)){
                       foreach ($showtbl as $key => $value) {
                         $status = ($value['status'] == '1') ? "Pending" : "Completed";
+                        $check="";
+                        if ($_SESSION['can_update_task'] == '1'){
+                          $check = ($value['status'] == '1') ? "<input type='checkbox' class='mark_done' value='".$value['sno']."' title='Check to mark completed' nonce='".$_SESSION['nonce']."' ta='task' active_deactive='Update'/>" : "";
+                        }
                         $outp.="<tr>";
-                        $outp.="<td><input type='checkbox' class='mark_done' value='".$value['sno']."' title='Check to mark completed' nonce='".$_SESSION['nonce']."' ta='task' active_deactive='Update'/></td>
+                        $outp.="<td>".$check."</td>
                                 <td>".$value['task_title']."</td>
                                 <td>".$value['task_desc']."</td>
                                 <td>".$showtbl = $users->view('users_tbl',"AND `email_id`='".$value['added_by']."'",'username')." </td>

@@ -8,6 +8,12 @@
   $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . '$3', $buffer);
   echo $buffer;
   require("_navbar.php");
+  $auth = new Auth;
+
+  $check = $auth->validate_rights('can_add_user');
+  if ($check == '0'){
+   header('Location: 404.php');
+  }
 ?>
 <style>
 
@@ -102,6 +108,10 @@
                                 <div class="col-sm-4">
                                   <input type="checkbox" id="view_enquiry" name="can_view_enquiry" value="1"/>
                                   <label>View Enquiry</label>
+                                </div>
+                                <div class="col-sm-4">
+                                  <input type="checkbox" id="delete_enquiry" name="can_delete_enquiry" value="1"/>
+                                  <label>Delete Enquiry</label>
                                 </div>
                               </div>
                             </fieldset>

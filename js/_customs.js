@@ -71,7 +71,7 @@ $(document).on('submit', 'form.submiit', function(e){
                   confirmButtonText: 'Done!'
                 }).then((result) => {
                   if (result.value) {
-                    if(action == "update"){
+                    if(action == "update" && formId !== "users"){
                       window.history.back();
                     }
                     else{
@@ -194,20 +194,13 @@ else{
          data: {for: 'update_task',approveids_arr: approveids_insideData,active_deactive:active_deactive,nonce:nonce,t:t},
          beforeSend: function() {
              // setting a timeout
-             $("td[value="+approveids_insideData+"]").closest("tr").addClass('strikeout');
+             // $("td[value='"+approveids_insideData+"']").closest("tr").addClass('strikeout');
              // $("#taskList tbody tr").addClass('strikeout');
-
          }
       })
     .done(function(data){
       console.log(data);
-        // $('#spinner').hide();
-        // setTimeout(
-          $("#taskList tbody").html(data);
-        // , 2000);
-        //$("#taskList tbody tr").removeClass('strikeout');
-
-      //  return true;
+      $("#taskList tbody").html(data);
     })
     .fail(function(data){
        console.log(data);
@@ -218,7 +211,7 @@ else{
          type: 'error'
          });
     });
-    $('#spinner').hide();
+    // $('#spinner').hide();
     }
 }
  $(document).on('click','#delete_all_enquiry',function(){
@@ -233,8 +226,6 @@ else{
 		if(active_deactive == "Delete"){
 
 					if(approveids_insideData.length > 0){
-						 // Confirm alert
-						 //var confirmapprove = confirm("Do you really want to Approve user?");
 						statusChange(active_deactive,approveids_insideData,nonce,t);
 					}
 			}
@@ -250,14 +241,84 @@ else{
     });
 		if(active_deactive == "Update"){
 					if(approveids_insideData.length > 0){
-						 // Confirm alert
-						 //var confirmapprove = confirm("Do you really want to Approve user?");
-             $(this).parent("tr").addClass('strikeout');
-
              setTimeout(function () {
-
-               //statusChange(active_deactive,approveids_insideData,nonce,t);
-             }, 1000);
+               statusChange(active_deactive,approveids_insideData,nonce,t);
+             }, 500);
 					}
 			}
  });
+
+ $(document).on('submit','#changepass',function(e){
+ 	e.preventDefault();
+ 	var nonce = $(this).attr('nonce');
+    var currpass = $('#current_password').val();
+     // alert(currpass);
+    var newpass = $('#newpass').val();
+    var confirmpass = $('#confirmpass').val();
+    var email = $('#email_id').val();
+ 	 var my_passw = $('#my_passw').val();
+
+      if(currpass == '' || newpass == '' || confirmpass == '')
+      {
+ 			Swal.fire({
+         title: 'Empty fields',
+         text: 'Please enter your valid data',
+         icon: 'warning'
+         });
+
+        $("#current_password").focus();
+ 			 return false;
+      }
+      if(confirmpass != newpass)
+       {
+ 				Swal.fire({
+ 	        title: 'Invalid Password',
+ 	        text: 'Current password and confirmation password must be same',
+ 	        icon: 'warning'
+ 	        });
+          $("#confirmpass").focus();
+        }
+      else
+      {
+         $.ajax({
+ 		     method : 'POST',
+ 		     url  : '_functions.php',
+ 		     data : {current_password:currpass,email:email,password:newpass,for:'change_passowrd',nonce:nonce},
+ 		     success : function(data)
+ 		          {
+                console.log(data);
+                if(data.trim() == "Done"){
+                  Swal.fire({
+   									title: 'Password changed',
+   									text: "Password Changed Successfully",
+   									type: 'success',
+   									allowOutsideClick: false,
+   									allowEscapeKey: false,
+   									showCancelButton: false,
+   									confirmButtonColor: '#3085d6',
+   									cancelButtonColor: '#d33',
+   									confirmButtonText: 'Done!'
+   								}).then((result) => {
+   									if (result.value) {
+   											 window.location.href = 'logout.php';
+   									}
+   								});
+                }
+                else{
+                  Swal.fire({
+   									title: 'Error occured',
+   									text: data,
+   									type: 'warning'
+   								});
+                }
+ 		         },
+             error: function (textStatus, errorThrown) {
+               Swal.fire({
+                  title: 'Error occured',
+                  text: textStatus,
+                  type: 'warning'
+                });
+             }
+ 					 });
+ 				 }
+    });

@@ -45,4 +45,25 @@ defined('READAUTh') or die('Not authorised');
    }
  }
 
+ /**
+  *
+  */
+ class Auth extends Con
+ {
+   function validate_rights($rights){
+     $sqlRights = "SELECT * FROM `users_tbl` WHERE `email_id`='".$_SESSION['email_id']."'";
+     $resRighs = mysqli_query($GLOBALS['connection'],$sqlRights);
+     if($resRighs && mysqli_num_rows($resRighs)){
+       $rowRights = mysqli_fetch_array($resRighs);
+       if($rowRights[$rights] == "1"){
+         return 1;
+       }
+       else{
+         return 0;
+       }
+     }
+   }
+ }
+
+
  ?>
