@@ -17,20 +17,3 @@ TASK 1:
 
 Kindly above task using AJAX, JQuery, JSON, REST API on Core PHP, MySql, Bootstrap
 
-Add User Fields (DB)
-  - name
-  - contact
-  - email
-  - date of birth
-  - gender
-  - can_add_user
-  - can_view_user
-  - can_update_user
-  - can_delete_user
-  - can_add_enquiry
-  - can_view_enquiry
-  - can_add_task
-  - can_update_task
-  - status
-  - added_on
-  - added_by
