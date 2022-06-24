@@ -27,7 +27,7 @@
 
 <script src="assets/demo/chart-area-demo.js"></script>
 <script src="assets/demo/chart-bar-demo.js"></script>
-<?php endif ?>
+
 <script>
   $(document).ready(function(){
     $("#spinner").hide();
@@ -42,8 +42,10 @@
           $users = new Users;
           $showtbl = $users->view('enquiry_tbl','','');
           $graph="";
-          foreach ($showtbl as $key => $value) {
-            $graph.="['".date("Y-m-d",strtotime($value['added_on']))."',".$users->count('enquiry_tbl',' AND `added_on`="'.$value['added_on'].'"')."],";
+          if(is_array($showtbl)){
+            foreach ($showtbl as $key => $value) {
+              $graph.="['".date("Y-m-d",strtotime($value['added_on']))."',".$users->count('enquiry_tbl',' AND `added_on`="'.$value['added_on'].'"')."],";
+            }
           }
           echo $graph;
           ?>
@@ -70,8 +72,12 @@
           $users = new Users;
           $showtbl2 = $users->view('task_tbl',' AND `status` = "0" GROUP BY DATE(`added_on`)','');
           $graph2="";
-          foreach ($showtbl2 as $key => $value) {
-            $graph2.="['".date("Y-m-d",strtotime($value['added_on']))."',".$users->count('task_tbl',' AND DATE(`added_on`)="'.date("Y-m-d",strtotime($value['added_on'])).'" AND `status`="0"')."],";
+          echo $showtbl2;
+          print_r($showtbl2);
+          if(is_array($showtbl2)){
+            foreach ($showtbl2 as $key => $value) {
+              $graph2.="['".date("Y-m-d",strtotime($value['added_on']))."',".$users->count('task_tbl',' AND DATE(`added_on`)="'.date("Y-m-d",strtotime($value['added_on'])).'" AND `status`="0"')."],";
+            }
           }
           echo $graph2;
           ?>
@@ -96,5 +102,6 @@
   });
 
 </script>
+<?php endif ?>
 </body>
 </html>

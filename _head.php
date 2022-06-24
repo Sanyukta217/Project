@@ -14,9 +14,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     </head>
 <body>
-  <div id="spinner">
+  <!-- <div id="spinner">
     <div class="lds-hourglass"></div>
-  </div>
+  </div> -->
   <?php
   if(session_id() == '') {
       session_start();
@@ -26,5 +26,8 @@
 	}
 	require_once('authenticate.php');
   $auth = new Auth;
-  $sessuion = $auth->fetchRights($_SESSION['email_id']);
+  if(isset($_SESSION['email_id'])){
+    $sessuion = $auth->fetchRights($_SESSION['email_id']);
+
+  }
   ?>

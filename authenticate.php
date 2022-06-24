@@ -42,6 +42,9 @@ defined('READAUTh') or die('Not authorised');
        }
        return $retyrn;
      }
+     else{
+       return false;
+     }
    }
    function count($tbl, $cond){
      $sqlSelct = "SELECT * FROM `".$tbl."` WHERE 1 ".$cond."";
