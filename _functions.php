@@ -7,7 +7,7 @@ if(session_id() == '') {
 
 (!isset($_POST['nonce'])) ? die('You are not on a valid location') : "";
 
-// designed by sanyukta
+// designed by sanyukta kumari
 //To connect with the dbconnection file
 if (!defined('READCON')) {
   define('READCON', true);
